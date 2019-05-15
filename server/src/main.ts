@@ -1,8 +1,7 @@
-import {QueryResult} from "pg";
+import {QueryResult, Client} from "pg";
 import { Request, Response, Application } from 'express'
 
 const express = require('express')
-const { Client } = require('pg')
 
 const client = new Client({
   user: 'desx_user',
