@@ -1,9 +1,32 @@
-let express = require('express')
+import {QueryResult, Client} from "pg";
+import { Request, Response, Application } from 'express'
+
+const express = require('express')
+
+const client = new Client({
+  user: 'desx_user',
+  host: '127.0.0.1',
+  database: 'desx_cards',
+  password: 'desx_pass',
+  port: 5430,
+})
+
+client.connect()
+client.query(
+  `CREATE TABLE IF NOT EXISTS cards (
+    id uuid not null primary key, 
+    name varchar(16) not null, 
+    typeMagic varchar(16) not null, 
+    power int not null
+  )`
+)
 
 const app = express()
 
-app.get('/', (req: any, res: any) => {
-  res.send("<h1>Дурак</h1>")
+app.get('/api/card/list', (req: Request, res: Response) => {
+  client.query('select * from cards').then((resultDb: QueryResult) => {
+    res.send(resultDb.rows)
+  })
 })
 
 app.listen(3000)
