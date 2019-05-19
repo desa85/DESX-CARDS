@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-export interface AppProps {compiler: string; framework: string;}
+export interface AppProps {param: number;}
 
 export class App extends React.Component<AppProps, {}> {
   render() {
@@ -42,7 +42,7 @@ export class App extends React.Component<AppProps, {}> {
           <div className = 'card card_active'>
             <div className = 'card__name'>ХЬЮГА</div>
             <div className = 'card__info'>
-            <p>ВЕТРЕ</p>
+            <p>ВЕТЕР</p>
             <p>55</p>
             </div>
             <button>DEL</button>
@@ -85,7 +85,7 @@ export class App extends React.Component<AppProps, {}> {
           </div>
           <div className = 'cards-info'>
             <div className = 'cards-info__params'>
-            <p>ВСЕГДА</p>
+            <p>ВСЕГО</p>
             <p>12</p>
             </div>
           </div>

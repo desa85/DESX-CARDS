@@ -15,8 +15,8 @@ module.exports = {
 		})
 	],
 
-  devtool: "source-map",
 
+  devtool: "source-map",
   resolve: {
 		extensions: [".ts", ".tsx", ".js", ".json"]
   },
@@ -40,6 +40,10 @@ module.exports = {
             loader: "sass-loader"
           }
         ]
+      },
+      {
+        test: /\.ttf$/,
+        loader: 'file-loader?name=./fonts/[name].[ext]'
       }
 		]
   },

@@ -5,6 +5,6 @@ import * as ReactDOM from 'react-dom';
 import { App } from "./components/hello";
 
 ReactDOM.render(
-  <App compiler = "Typescript" framework = "React" />,
+  <App param = {null} />,
   document.getElementById("example")
 )
