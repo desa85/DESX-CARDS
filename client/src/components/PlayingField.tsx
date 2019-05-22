@@ -1,21 +1,24 @@
 import * as React from 'react'
 import { Card } from './Card'
 
-export interface PlayingFieldProp {data: object;}
+export interface PlayingFieldProp {data: [{name: string, typemagic: string, power: number}];}
 
 export class PlayingField extends React.Component<PlayingFieldProp, {}> {
   render() {
     return(
       <div id = 'playing-field'>
-        <Card data = { {isActive: true, name: 'АНТАРАС', typeMagic: 'ЗЕМЛЯ', power: 60} } />
-        <Card data = { {isActive: true, name: 'СОНИК', typeMagic: 'ВОДА', power: 55} } />
-        <Card data = { {isActive: true, name: 'ГЛЫБА', typeMagic: 'ЗЕМЛЯ', power: 30} } />
-        <Card data = { {isActive: true, name: 'ХЬЮГА', typeMagic: 'ВЕТЕР', power: 50} } />
-        <Card data = { {isActive: true, name: 'ВАЛАКАС', typeMagic: 'ОГОНЬ', power: 70} } />
-        <Card data = { {isActive: false} } />
-        <Card data = { {isActive: false} } />
-        <Card data = { {isActive: false} } />
-        <Card data = { {isActive: false} } />  
+        {this.props.data
+          .map(card => <Card data = { 
+            {
+              isActive: true, 
+              name: card.name, 
+              typeMagic: card.typemagic, 
+              power: card.power
+            } 
+          } />)}
+        {Array(9 - this.props.data.length)
+          .fill(0)
+          .map(item => <Card data = { {isActive: false} } />)} 
       </div>
     )
   }

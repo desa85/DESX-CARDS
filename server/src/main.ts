@@ -50,6 +50,9 @@ const app = express()
 
 app.get('/api/card/list', (req: Request, res: Response) => {
   client.query('select * from cards').then((resultDb: QueryResult) => {
+    res.header('Access-Control-Allow-Origin', '*')
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE')
+    res.header('Access-Control-Allow-Headers', 'Content-Type')
     res.send(resultDb.rows)
   })
 })
