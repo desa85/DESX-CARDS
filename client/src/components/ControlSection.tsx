@@ -1,8 +1,6 @@
 import * as React from 'react'
 
-export interface ControlSectionProp {data: object;}
-
-export class ControlSection extends React.Component<ControlSectionProp, {}> {
+export class ControlSection extends React.Component {
   render(){
     return(
       <div className = 'control-section'>

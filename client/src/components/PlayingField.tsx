@@ -1,24 +1,24 @@
 import * as React from 'react'
 import { Card } from './Card'
+import { Card as CardType } from '../Api'
 
-export interface PlayingFieldProp {data: [{name: string, typemagic: string, power: number}];}
+export interface Prop {cards: CardType[]}
 
-export class PlayingField extends React.Component<PlayingFieldProp, {}> {
+export class PlayingField extends React.Component<Prop, {}> {
   render() {
     return(
       <div id = 'playing-field'>
-        {this.props.data
-          .map(card => <Card data = { 
-            {
-              isActive: true, 
+        {this.props.cards
+          .map(card => <Card card = { 
+            { 
               name: card.name, 
-              typeMagic: card.typemagic, 
+              typemagic: card.typemagic, 
               power: card.power
             } 
           } />)}
-        {Array(9 - this.props.data.length)
+        {Array(9 - this.props.cards.length)
           .fill(0)
-          .map(item => <Card data = { {isActive: false} } />)} 
+          .map(item => <Card />)} 
       </div>
     )
   }

@@ -1,11 +1,11 @@
 import * as React from 'react'
 import { Content } from './Content'
 import { GeneralInfo } from './GeneralInfo'
-import Api from '../Api';
+import Api, { Card } from '../Api';
 
-export interface GameProp {cards: boolean;}
+export interface GameProp { user: string }
 
-interface MyState { cards: object[] };
+interface MyState { cards: Card[] };
 
 export class Game extends React.Component<GameProp, MyState, {}> {
   
@@ -18,14 +18,15 @@ export class Game extends React.Component<GameProp, MyState, {}> {
 
   componentWillMount() {
     Api.getCards()
-        .then((result: string) => this.setState({cards: JSON.parse(result)}))
+        .then((result: Card[]) => this.setState({cards: result}))
+        .catch(err => console.log(err))
   }
 
   render() {
     return(
       <div id = 'game'>
-        <Content data = { this.state.cards } />
-        <GeneralInfo data = { {} } />
+        <Content cards = { this.state.cards } />
+        <GeneralInfo />
       </div>
     )
   }

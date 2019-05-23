@@ -1,9 +1,7 @@
 import * as React from 'react'
 import { Message } from './Message'
 
-export interface NoticeProp {data: object;}
-
-export class Notice extends React.Component<NoticeProp, {}> {
+export class Notice extends React.Component {
   render() {
     return(
       <div className = 'notice'>
@@ -16,14 +14,14 @@ export class Notice extends React.Component<NoticeProp, {}> {
         </div>
         <div className = 'messages'>
             <div className = 'messages__new'>
-              <Message data = { {color: 'green', message: 'Карта :name: создана!'} } />
-              <Message data = { {color: 'yellow', message: 'Карта :name: изменена!'} } />
-              <Message data = { {color: 'red', message: 'Карта :name: удалена!'} } />
+              <Message content = { {color: 'green', message: 'Карта :name: создана!'} } />
+              <Message content = { {color: 'yellow', message: 'Карта :name: изменена!'} } />
+              <Message content = { {color: 'red', message: 'Карта :name: удалена!'} } />
             </div>
             <div className = 'line'></div>
             <div className = 'messages__old'>
-              <Message data = { {color: 'blue', message: 'Карта :name: сделан ход!'} } />
-              <Message data = { {color: 'green', message: 'Карта :name: создана!'} } />
+              <Message content = { {color: 'blue', message: 'Карта :name: сделан ход!'} } />
+              <Message content = { {color: 'green', message: 'Карта :name: создана!'} } />
             </div>
           </div>
       </div>
