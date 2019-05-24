@@ -8,8 +8,8 @@ export class Notice extends React.Component {
         <div className = 'notice__info'>
           <p>УВЕДОМЛЕНИЯ</p>
           <p>
-          <span>НОВЫХ: 3</span>
-          <span>ВСЕГО: 5</span>
+            <span>НОВЫХ: 3</span>
+            <span>ВСЕГО: 5</span>
           </p>
         </div>
         <div className = 'messages'>

@@ -5,7 +5,7 @@
   
   getCards(): Promise<Types.Card[]> {
     const path = 'http://' + location.hostname + ':' + port + '/api/card/list'
-    return new Promise(function (resolve, reject) {
+    return new Promise((resolve, reject) => {
       const request = new XMLHttpRequest()
       request.open('GET', path, true)
       request.onload = () => {

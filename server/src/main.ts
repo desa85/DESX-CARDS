@@ -13,8 +13,6 @@ const client = new Client({
 })
 
 async function createTable() {
-  let row
-
   await client.connect()
 
   await client.query(
@@ -26,7 +24,7 @@ async function createTable() {
     )`
   )
 
-  row = await client.query(`SELECT COUNT(*) FROM cards`)
+  const row = await client.query(`SELECT COUNT(*) FROM cards`)
   try {
     if (row.rows[0].count == 0) {
       await client.query(
