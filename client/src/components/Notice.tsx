@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Message } from './Message'
+import { NoticeElem } from './NoticeElem'
 
 export class Notice extends React.Component {
   render() {
@@ -14,14 +14,14 @@ export class Notice extends React.Component {
         </div>
         <div className = 'messages'>
             <div className = 'messages__new'>
-              <Message content = { {color: 'green', message: 'Карта :name: создана!'} } />
-              <Message content = { {color: 'yellow', message: 'Карта :name: изменена!'} } />
-              <Message content = { {color: 'red', message: 'Карта :name: удалена!'} } />
+              <NoticeElem content = { {color: 'green', message: 'Карта :name: создана!'} } />
+              <NoticeElem content = { {color: 'yellow', message: 'Карта :name: изменена!'} } />
+              <NoticeElem content = { {color: 'red', message: 'Карта :name: удалена!'} } />
             </div>
             <div className = 'line'></div>
             <div className = 'messages__old'>
-              <Message content = { {color: 'blue', message: 'Карта :name: сделан ход!'} } />
-              <Message content = { {color: 'green', message: 'Карта :name: создана!'} } />
+              <NoticeElem content = { {color: 'blue', message: 'Карта :name: сделан ход!'} } />
+              <NoticeElem content = { {color: 'green', message: 'Карта :name: создана!'} } />
             </div>
           </div>
       </div>

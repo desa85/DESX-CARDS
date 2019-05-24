@@ -1,12 +1,12 @@
 import * as React from 'react'
-import { GeneralGameInfo } from './GeneralGameInfo'
+import { Stat } from './Stat'
 import { Notice } from './Notice'
 
-export class GeneralInfo extends React.Component{
+export class BlockInfo extends React.Component{
   render() {
     return(
       <div id = 'general-info'>
-          <GeneralGameInfo/>
+          <Stat/>
           <Notice/>
         </div>
     )

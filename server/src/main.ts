@@ -21,7 +21,7 @@ async function createTable() {
     `CREATE TABLE IF NOT EXISTS cards (
       id uuid not null primary key, 
       name varchar(16) not null, 
-      typeMagic varchar(16) not null, 
+      type_magic varchar(16) not null, 
       power int not null
     )`
   )
@@ -30,7 +30,7 @@ async function createTable() {
   try {
     if (row.rows[0].count == 0) {
       await client.query(
-        `insert into cards (id, name, typeMagic, power) values
+        `insert into cards (id, name, type_magic, power) values
         ('${uuid()}', 'АНТАРАС', 'ЗЕМЛЯ', 60),
         ('${uuid()}', 'СОНИК', 'ВОДА', 55),
         ('${uuid()}', 'ГЛЫБА', 'ЗЕМЛЯ', 30),
@@ -53,7 +53,10 @@ app.get('/api/card/list', (req: Request, res: Response) => {
     res.header('Access-Control-Allow-Origin', '*')
     res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE')
     res.header('Access-Control-Allow-Headers', 'Content-Type')
-    res.send(resultDb.rows)
+    res.send(
+      resultDb.rows
+        .map(card => {return { id: card.id, name: card.name, typeMagic: card.type_magic, power: card.power }})
+    )
   })
 })
 

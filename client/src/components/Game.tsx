@@ -1,11 +1,13 @@
+/// <reference path="../Types" />
+
 import * as React from 'react'
 import { Content } from './Content'
-import { GeneralInfo } from './GeneralInfo'
-import Api, { Card } from '../Api';
+import { BlockInfo } from './BlockInfo'
+import Api from '../Api';
 
 export interface GameProp { user: string }
 
-interface MyState { cards: Card[] };
+interface MyState { cards: Types.Card[] };
 
 export class Game extends React.Component<GameProp, MyState, {}> {
   
@@ -18,7 +20,7 @@ export class Game extends React.Component<GameProp, MyState, {}> {
 
   componentWillMount() {
     Api.getCards()
-        .then((result: Card[]) => this.setState({cards: result}))
+        .then((result: Types.Card[]) => this.setState({cards: result}))
         .catch(err => console.log(err))
   }
 
@@ -26,7 +28,7 @@ export class Game extends React.Component<GameProp, MyState, {}> {
     return(
       <div id = 'game'>
         <Content cards = { this.state.cards } />
-        <GeneralInfo />
+        <BlockInfo />
       </div>
     )
   }

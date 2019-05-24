@@ -1,8 +1,9 @@
+/// <reference path="../Types" />
+
 import * as React from 'react'
 import { Card } from './Card'
-import { Card as CardType } from '../Api'
 
-export interface Prop {cards: CardType[]}
+export interface Prop {cards: Types.Card[]}
 
 export class PlayingField extends React.Component<Prop, {}> {
   render() {
@@ -12,7 +13,7 @@ export class PlayingField extends React.Component<Prop, {}> {
           .map(card => <Card card = { 
             { 
               name: card.name, 
-              typemagic: card.typemagic, 
+              typeMagic: card.typeMagic, 
               power: card.power
             } 
           } />)}
