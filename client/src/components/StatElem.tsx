@@ -2,9 +2,9 @@ import * as React from 'react'
 
 export interface StatElemProp {
   info: {
-    definition: string,
-    value: number
-  }
+    definition: string;
+    value: number;
+  };
 }
 
 export class StatElem extends React.Component<StatElemProp, {}> {

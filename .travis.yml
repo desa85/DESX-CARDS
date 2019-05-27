@@ -1,0 +1,14 @@
+language: node_js
+node_js:
+  - '10'
+install:
+  - cd server
+  - npm install
+  - cd ../client
+  - npm install
+  - cd ..
+script:
+  - cd server
+  - ./node_modules/.bin/eslint src/ --ext .tsx --ext .ts
+  - cd ../client
+  - ./node_modules/.bin/eslint src/ --ext .tsx --ext .ts

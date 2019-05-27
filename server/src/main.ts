@@ -1,8 +1,6 @@
 import {QueryResult, Client} from "pg";
-import { Request, Response, Application } from 'express'
-
-const express = require('express')
-const uuid = require('uuid/v4')
+import * as Express from 'express'
+import * as uuid from 'uuid/v4'
 
 const client = new Client({
   user: 'desx_user',
@@ -44,9 +42,9 @@ async function createTable() {
 
 createTable()
 
-const app = express()
+const app = Express()
 
-app.get('/api/card/list', (req: Request, res: Response) => {
+app.get('/api/card/list', (req: Express.Request, res: Express.Response) => {
   client.query('select * from cards').then((resultDb: QueryResult) => {
     res.header('Access-Control-Allow-Origin', '*')
     res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE')

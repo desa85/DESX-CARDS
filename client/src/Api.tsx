@@ -1,7 +1,7 @@
 /// <reference path="Types" />
  
- const port = 3000
- const Api = {
+const port = 3000
+const Api = {
   
   getCards(): Promise<Types.Card[]> {
     const path = 'http://' + location.hostname + ':' + port + '/api/card/list'
