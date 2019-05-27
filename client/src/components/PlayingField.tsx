@@ -9,8 +9,8 @@ export class PlayingField extends React.Component<Prop, {}> {
   render() {
     return(
       <div id = 'playing-field'>
-        {this.props.cards.map(card => <Card card = {card} />)}
-        {Array(9 - this.props.cards.length).fill(0).map(item => <Card />)} 
+        {this.props.cards.map((card, index) => <Card key = {index} card = {card} />)}
+        {Array(9 - this.props.cards.length).fill(0).map((item, index) => <Card key = {index + this.props.cards.length} />)} 
       </div>
     )
   }

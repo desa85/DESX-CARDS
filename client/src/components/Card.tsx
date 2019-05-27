@@ -1,8 +1,9 @@
+/// <reference path="../Types" />
+
 import * as React from 'react'
-import { Card as CardType } from '../Api'
 
 export interface CardProp {
-  card?: CardType
+  card?: Types.Card;
 }
 
 export class Card extends React.Component<CardProp, {}> {
@@ -18,7 +19,7 @@ export class Card extends React.Component<CardProp, {}> {
           <button>DEL</button>
           <button>EDIT</button>
         </div>
-      :
+        :
         <div className = 'card'></div>
     )  
   }

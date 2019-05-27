@@ -1,9 +1,9 @@
 import * as React from 'react'
 
 export interface NoticeElemProp {content: {
-  color: string,
-  message: string
-}}
+  color: string;
+  message: string;
+};}
 
 export class NoticeElem extends React.Component<NoticeElemProp, {}> {
   render() {

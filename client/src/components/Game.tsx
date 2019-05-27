@@ -20,8 +20,8 @@ export class Game extends React.Component<GameProp, MyState, {}> {
 
   componentWillMount() {
     Api.getCards()
-        .then((result: Types.Card[]) => this.setState({cards: result}))
-        .catch(err => console.log(err))
+      .then((result: Types.Card[]) => this.setState({cards: result}))
+      .catch(err => console.log(err))
   }
 
   render() {
