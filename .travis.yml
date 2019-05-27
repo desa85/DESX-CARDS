@@ -3,7 +3,14 @@ matrix:
   - language: node_js
     node_js:
       - '10'
-
     install:
+      - cd server
       - npm install
-
+      - cd ../client
+      - npm install
+      - cd ..
+    script:
+      - cd server
+      - ./node_modules/.bin/eslint src/*.ts
+      - cd ../client
+      - ./node_modules/.bin/eslint src/*/*.tsx
