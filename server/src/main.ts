@@ -1,6 +1,7 @@
 import {QueryResult, Client} from "pg";
 import * as Express from 'express'
 import * as uuid from 'uuid/v4'
+import * as bodyParser from 'body-parser'
 
 const client = new Client({
   user: 'desx_user',
@@ -44,6 +45,8 @@ createTable()
 
 const app = Express()
 
+app.use(bodyParser())
+
 app.get('/api/card/list', (req: Express.Request, res: Express.Response) => {
   client.query('select * from cards').then((resultDb: QueryResult) => {
     res.header('Access-Control-Allow-Origin', '*')
@@ -54,6 +57,44 @@ app.get('/api/card/list', (req: Express.Request, res: Express.Response) => {
         .map(card => {return { id: card.id, name: card.name, typeMagic: card.type_magic, power: card.power }})
     )
   })
+})
+
+app.post('/api/card/', (req: Express.Request, res: Express.Response) => {
+  let isSaccess = true;
+
+  [
+    [req.body.name, 'string', 'name'],
+    [req.body.typeMagic, 'string', 'typeMagic'],
+    [req.body.power, 'number', 'power']
+  ].forEach(function ([value, type, name]) {
+    let code, message
+    
+    if (!value) [code, message] = ['no-line', `No property ${name}`]
+    else if (typeof value !== type) [code, message] = ['disparity-type', `wrong type in ${name}`]
+    else if (type === 'string' && value && value.length > 6) {
+      [code, message] = ['validation-name', `In the '${name}' property, more than 6 characters`]
+    }
+    if (code) {
+      isSaccess = false
+      res.send(JSON.stringify({
+        code: code,
+        message: message
+      }))
+    } 
+  } )
+
+  if (isSaccess) {
+    const id: string = uuid()
+    client.query(`INSERT INTO cards (id, name, type_magic, power) VALUES 
+      ('${id}', '${req.body.name}', '${req.body.typeMagic}', ${req.body.power})`)
+      .then(() => {
+        res.send({ id: id, name: req.body.name, typeMagic: req.body.typeMagic, power: req.body.power })
+      })
+  }
+})
+
+app.delete('/api/card/:id', (req: Express.Request) => {
+  client.query(`DELETE FROM cards where id = '${req.params.id}'`)
 })
 
 app.listen(3000)

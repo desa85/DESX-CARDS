@@ -1,3 +1,7 @@
 declare module "Types" {
-  export interface Card  {name: string; typeMagic: string; power: number}
+  export interface Card  {
+    name: string; 
+    typeMagic: string; 
+    power: number;
+  }
 }

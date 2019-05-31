@@ -1,4 +1,4 @@
-/// <reference path="../Types" />
+/// <reference path="../Types.ts" />
 
 import * as React from 'react'
 
