@@ -62,7 +62,7 @@ app.get('/api/card/list', (req: Express.Request, res: Express.Response) => {
 app.post('/api/card/', (req: Express.Request, res: Express.Response) => {
   let isSuccess = true;
   let code: string, 
-      message: string
+    message: string
 
   [
     ['string', 'name'],
