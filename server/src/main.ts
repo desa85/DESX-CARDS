@@ -60,30 +60,42 @@ app.get('/api/card/list', (req: Express.Request, res: Express.Response) => {
 })
 
 app.post('/api/card/', (req: Express.Request, res: Express.Response) => {
-  let isSaccess = true;
+  let isSuccess = true;
+  let code: string, 
+      message: string
 
   [
-    [req.body.name, 'string', 'name'],
-    [req.body.typeMagic, 'string', 'typeMagic'],
-    [req.body.power, 'number', 'power']
-  ].forEach(function ([value, type, name]) {
-    let code, message
-    
-    if (!value) [code, message] = ['no-line', `No property ${name}`]
-    else if (typeof value !== type) [code, message] = ['disparity-type', `wrong type in ${name}`]
-    else if (type === 'string' && value && value.length > 6) {
-      [code, message] = ['validation-name', `In the '${name}' property, more than 6 characters`]
+    ['string', 'name'],
+    ['string', 'typeMagic'],
+    ['number', 'power']
+  ].forEach(function ([type, name]) {
+
+    function Possible(option: string): boolean {
+      return option === req.body[name]
     }
+
+    if (isSuccess) {
+      if (!req.body[name]) [code, message] = ['no-line', `No property ${name}`]
+      else if (typeof req.body[name] !== type) [code, message] = ['disparity-type', `wrong type in ${name}`]
+      else if (name === 'name' && req.body[name] && req.body[name].length > 6) {
+        [code, message] = ['validation-name', `In the '${name}' property, more than 6 characters`]
+      } else if (['earth', 'water', 'fire', 'wind'].find(Possible)) {
+        [code, message] = ['validation-type-magic', `must be enum type`]
+      } else if (name === 'power' && (req.body[name] < 1 || req.body[name] > 200)) {
+        [code, message] = ['validation-power', `value is not valid`]
+      }
+    }
+    
     if (code) {
-      isSaccess = false
-      res.send(JSON.stringify({
+      isSuccess = false
+      res.status(400).send({
         code: code,
         message: message
-      }))
-    } 
+      })
+    }
   } )
 
-  if (isSaccess) {
+  if (isSuccess) {
     const id: string = uuid()
     client.query(`INSERT INTO cards (id, name, type_magic, power) VALUES 
       ('${id}', '${req.body.name}', '${req.body.typeMagic}', ${req.body.power})`)
@@ -93,8 +105,9 @@ app.post('/api/card/', (req: Express.Request, res: Express.Response) => {
   }
 })
 
-app.delete('/api/card/:id', (req: Express.Request) => {
+app.delete('/api/card/:id', (req: Express.Request, res: Express.Response) => {
   client.query(`DELETE FROM cards where id = '${req.params.id}'`)
+    .then(() => res.status(204).send())
 })
 
 app.listen(3000)
