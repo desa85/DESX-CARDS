@@ -1,4 +1,4 @@
-/// <reference path="Types" />
+/// <reference path="Types.ts" />
  
 const port = 3000
 const Api = {
