@@ -216,3 +216,67 @@ body {
     margin-left: 13px;
   }
 }
+
+.create-card {
+  width: 846px;
+  height: 530px;
+  border: solid 1px #979797;
+  background-color: #d2ac4e;
+  margin-right: 15px;
+
+  &__name-card {
+    width: 530px;
+    border-bottom: #979797 solid 1px;
+    margin: auto;
+    margin-top: 69px;
+  }
+
+  &__input {
+    font-size: 25px;
+    font-family: 'Avenir-Next';
+    background-color: #00000000;
+    border: none;
+    width: 100%;
+    margin-bottom: 3px;
+    text-align: center;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  &__choose-magic {
+    display: flex;
+    justify-content: space-between;
+    width: 530px;
+    margin: auto;
+    margin-top: 48px;
+    margin-bottom: 30px;
+  }
+
+  &__type-magic {
+    width: 113px;
+    height: 100px;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
+    background-color: #00000000;
+    border: none;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  &__button {
+    display: block;
+    width: 530px;
+    height: 85px;
+    border: solid 1px #979797;
+    background-color: #d29c4e;
+    margin: auto;
+    margin-top: 13px;
+
+    &:focus {
+      outline: none;
+    }
+  }
+}

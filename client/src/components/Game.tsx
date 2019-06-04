@@ -1,20 +1,22 @@
-/// <reference path="../Types" />
+/// <reference path="../Types.ts" />
 
 import * as React from 'react'
 import { Content } from './Content'
 import { BlockInfo } from './BlockInfo'
+import { CreateCard } from './CreateCard'
 import Api from '../Api';
 
 export interface GameProp { user: string }
 
-interface MyState { cards: Types.Card[] };
+interface MyState { cards: Types.Card[]; route: string };
 
 export class Game extends React.Component<GameProp, MyState, {}> {
   
   constructor(props: GameProp) {
     super(props)
     this.state = {
-      cards: []
+      cards: [],
+      route: 'createCard'
     }
   }
 
@@ -27,7 +29,11 @@ export class Game extends React.Component<GameProp, MyState, {}> {
   render() {
     return(
       <div id = 'game'>
-        <Content cards = { this.state.cards } />
+        {
+          (this.state.route === 'game') && <Content cards = { this.state.cards } /> ||
+          (this.state.route === 'createCard') && <CreateCard /> ||
+          false
+        } 
         <BlockInfo />
       </div>
     )
