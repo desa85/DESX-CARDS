@@ -1,30 +1,49 @@
 /// <reference path="../Types.ts" />
 
 import * as React from 'react'
+import { CardRadio } from './CardRadio'
 
-export class CreateCard extends React.Component {
-	render() {
-		return (
-			<div className = 'create-card'>
-				<div className = 'create-card__name-card'>
-					<input className = 'create-card__input' placeholder = 'Название Новой Карты' />
-				</div>
-				<div className = 'create-card__choose-magic'>
-					<input type = 'radio' name = 'create-card__radio' value = 'earth' id = 'create-card__radio_1' />
-					<label for = 'create-card__radio_1' className = 'create-card__type-magic'>ЗЕМЛЯ</label>
+interface CreateCardProp { typeIs: string; input: string; route: void; }
 
-					<input type = 'radio' name = 'create-card__radio' value = 'water' id = 'create-card__radio_2' />
-					<label for = 'create-card__radio_2' className = 'create-card__type-magic'>ВОДА</label>
+export class CreateCard extends React.Component<CreateCardProp> {
+  constructor (props: CreateCardProp) {
+    super(props)
+    this.state = {
+      typeIs: this.props.typeIs,
+      input: ''
+    }
+  }
 
-					<input type = 'radio' name = 'create-card__radio' value = 'fire' id = 'create-card__radio_3' />
-					<label for = 'create-card__radio_3' className = 'create-card__type-magic'>ОГОНЬ</label>
+  render() {
+    const chooseTypeMagic = function (type: string): void { this.setState( {typeIs: type} ) }
+    const goToGame = function () {this.props.route('game')}
+    const createCard = function (name:string, type: string) {
+      alert(name + ' ' + type)
+      goToGame.bind(this)()
+    }
 
-					<input type = 'radio' name = 'create-card__radio' value = 'wind' id = 'create-card__radio_4' />
-					<label for = 'create-card__radio_4' className = 'create-card__type-magic'>ВЕТЕР</label>
-				</div>
-				<button className = 'create-card__button'>СОЗДАТЬ/РЕДАКТИРОВАТЬ</button>
-				<button className = 'create-card__button'>ОТМЕНИТЬ</button>
-			</div>
-		)
-	}
+    return (
+      <div className = 'create-card'>
+        <div className = 'create-card__name-card'>
+          <input 
+            value = {this.state.input}
+            onChange = {e => this.setState({input: e.target.value})} 
+            className = 'create-card__input' 
+            placeholder = 'Название Новой Карты' 
+          />
+        </div>
+        <div className = 'create-card__choose-magic'>
+          <CardRadio choose = {chooseTypeMagic.bind(this)} type = 'ЗЕМЛЯ' active = {this.state.typeIs} />
+          <CardRadio choose = {chooseTypeMagic.bind(this)} type = 'ВОДА' active = {this.state.typeIs} />
+          <CardRadio choose = {chooseTypeMagic.bind(this)} type = 'ОГОНЬ' active = {this.state.typeIs} />
+          <CardRadio choose = {chooseTypeMagic.bind(this)} type = 'ВЕТЕР' active = {this.state.typeIs} />
+        </div>
+        <button onClick = {() => createCard.bind(this)(this.state.input, this.state.typeIs)} 
+        className = 'create-card__button'>
+          СОЗДАТЬ/РЕДАКТИРОВАТЬ
+        </button>
+        <button onClick = {goToGame.bind(this)} className = 'create-card__button'>ОТМЕНИТЬ</button>
+      </div>
+    )
+  }
 }

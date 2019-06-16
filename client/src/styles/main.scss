@@ -252,6 +252,8 @@ body {
     margin: auto;
     margin-top: 48px;
     margin-bottom: 30px;
+    font-family: 'Avenir-Next';
+    font-size: 25px;
   }
 
   &__type-magic {
@@ -260,9 +262,15 @@ body {
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
     background-color: #00000000;
     border: none;
+    text-align: center;
+    line-height: 100px;
 
     &:focus {
       outline: none;
+    }
+
+    &_active {
+      background-color: #3b9554;
     }
   }
 

@@ -1,10 +1,12 @@
 import * as React from 'react'
 
-export class ControlSection extends React.Component {
+export class ControlSection extends React.Component<{route: void}> {
   render () {
+    const onClick = function () {this.props.route('createCard')}
+
     return (
       <div className = 'control-section'>
-        <button className = 'control-section__button'>СОЗДАТЬ</button>
+        <button onClick = {onClick.bind(this)} className = 'control-section__button'>СОЗДАТЬ</button>
         <button className = 'control-section__button'>ОБНОВИТЬ</button>
       </div>
     )

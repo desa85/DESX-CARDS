@@ -16,7 +16,7 @@ export class Game extends React.Component<GameProp, MyState, {}> {
     super(props)
     this.state = {
       cards: [],
-      route: 'createCard'
+      route: 'game'
     }
   }
 
@@ -27,11 +27,13 @@ export class Game extends React.Component<GameProp, MyState, {}> {
   }
 
   render() {
+    const route = function (routing: string): void {this.setState( {route: routing} )}
+
     return(
       <div id = 'game'>
         {
-          (this.state.route === 'game') && <Content cards = { this.state.cards } /> ||
-          (this.state.route === 'createCard') && <CreateCard /> ||
+          (this.state.route === 'game') && <Content route = {route.bind(this)} cards = { this.state.cards } /> ||
+          (this.state.route === 'createCard') && <CreateCard route = {route.bind(this)} typeIs = 'ЗЕМЛЯ' /> ||
           false
         } 
         <BlockInfo />
