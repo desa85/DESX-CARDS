@@ -4,7 +4,6 @@ import * as React from 'react'
 import { Content } from './Content'
 import { BlockInfo } from './BlockInfo'
 import { CreateCard } from './CreateCard'
-import Api from '../Api';
 
 export interface GameProp { user: string }
 
@@ -19,21 +18,16 @@ export class Game extends React.Component<GameProp, MyState, {}> {
       route: 'game'
     }
   }
-
-  componentWillMount() {
-    Api.getCards()
-      .then((result: Types.Card[]) => this.setState({cards: result}))
-      .catch(err => console.log(err))
-  }
-
+  
   render() {
     const route = function (routing: string): void {this.setState( {route: routing} )}
+    const updateCards = function (cards: object[]): void {this.setState( {cards: cards} )}
 
     return(
       <div id = 'game'>
         {
-          (this.state.route === 'game') && <Content route = {route.bind(this)} cards = { this.state.cards } /> ||
-          (this.state.route === 'createCard') && <CreateCard route = {route.bind(this)} typeIs = 'ЗЕМЛЯ' /> ||
+          (this.state.route === 'game') && <Content updateCards = {updateCards.bind(this)} route = {route.bind(this)} cards = { this.state.cards } /> ||
+          (this.state.route === 'createCard') && <CreateCard route = {route.bind(this)} typeIs = 'earth' /> ||
           false
         } 
         <BlockInfo />

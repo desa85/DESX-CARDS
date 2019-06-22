@@ -4,6 +4,7 @@ export interface CardRadioProp {
   type: string;
   active: string;
   choose: void;
+  ru: string;
 }
 
 export class CardRadio extends React.Component<CardRadioProp, {}> {
@@ -18,7 +19,7 @@ export class CardRadio extends React.Component<CardRadioProp, {}> {
     return (<div 
       onClick = {onClick.bind(this)}
       className = {`create-card__type-magic ${(isActive) ? 'create-card__type-magic_active' : ''}`}>
-      {this.props.type}
+      {this.props.ru}
     </div>)
   }
 }
