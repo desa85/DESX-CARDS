@@ -25,7 +25,7 @@ export class CreateCard extends React.Component<CreateCardProp> {
         typeMagic: type, 
         power: power
       })
-        .then((result: Types.Card[]) => console.log(result))
+        .then((result: Types.Card[]) => result)
         .catch(err => console.log(err))
       goToGame.bind(this)()
     }

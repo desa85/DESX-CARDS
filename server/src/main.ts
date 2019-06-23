@@ -28,17 +28,23 @@ async function createTable() {
     if (row.rows[0].count == 0) {
       await client.query(
         `insert into cards (id, name, type_magic, power) values
-        ('${uuid()}', 'АНТАРАС', 'ЗЕМЛЯ', 60),
-        ('${uuid()}', 'СОНИК', 'ВОДА', 55),
-        ('${uuid()}', 'ГЛЫБА', 'ЗЕМЛЯ', 30),
-        ('${uuid()}', 'ХЬЮГА', 'ВЕТЕР', 50),
-        ('${uuid()}', 'ВАЛАКАС', 'ОГОНЬ', 70);`
+        ('${uuid()}', 'АНТАРАС', 'earth', 60),
+        ('${uuid()}', 'СОНИК', 'water', 55),
+        ('${uuid()}', 'ГЛЫБА', 'earth', 30),
+        ('${uuid()}', 'ХЬЮГА', 'wind', 50),
+        ('${uuid()}', 'ВАЛАКАС', 'fire', 70);`
       )
 
     }
   } catch (err) {
     console.log(err)
   }
+}
+
+const headers = (res: Express.Response) => {
+  res.header('Access-Control-Allow-Origin', '*')
+  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE')
+  res.header('Access-Control-Allow-Headers', 'Content-Type')
 }
 
 createTable()
@@ -49,18 +55,19 @@ app.use(bodyParser())
 
 app.get('/api/card/list', (req: Express.Request, res: Express.Response) => {
   client.query('select * from cards').then((resultDb: QueryResult) => {
-    res.header('Access-Control-Allow-Origin', '*')
-    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE')
-    res.header('Access-Control-Allow-Headers', 'Content-Type')
+    headers(res)
     res.send(
       resultDb.rows
         .map(card => {return { id: card.id, name: card.name, typeMagic: card.type_magic, power: card.power }})
     )
   })
 })
+app.options('/api/card/', (req: Express.Request, res: Express.Response) => {
+  headers(res)
+  res.send()
+})
 
 app.post('/api/card/', (req: Express.Request, res: Express.Response) => {
-
   class Error {
     code: string
     message: string
@@ -69,6 +76,7 @@ app.post('/api/card/', (req: Express.Request, res: Express.Response) => {
       this.message = message
     }
   }
+  res.header('Access-Control-Allow-Origin', '*')
 
   const validationLine = ([name, type]: string[]): Error | null => { 
     return (!req.body[name]) ? 
@@ -109,9 +117,17 @@ app.post('/api/card/', (req: Express.Request, res: Express.Response) => {
   } else res.status(400).send(error)
 })
 
+app.options('/api/card/:id', (req: Express.Request, res: Express.Response) => {
+  headers(res)
+  res.send()
+})
+
 app.delete('/api/card/:id', (req: Express.Request, res: Express.Response) => {
   client.query(`DELETE FROM cards where id = '${req.params.id}'`)
-    .then(() => res.status(204).send())
+    .then(() => {
+      headers(res)
+      res.status(204).send()
+    })
 })
 
 app.listen(3000)

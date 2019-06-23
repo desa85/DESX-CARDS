@@ -4,6 +4,7 @@ import * as React from 'react'
 
 export interface CardProp {
   card?: Types.Card;
+  deleteCardFromFiled: void;
 }
 
 export class Card extends React.Component<CardProp, {}> {
@@ -23,7 +24,7 @@ export class Card extends React.Component<CardProp, {}> {
             <p>{rusTranslation(this.props.card.typeMagic)}</p>
             <p>{this.props.card.power}</p>
           </div>
-          <button>DEL</button>
+          <button onClick = {() => this.props.deleteCard(this.props.card.id)}>DEL</button>
           <button>EDIT</button>
         </div>
         :

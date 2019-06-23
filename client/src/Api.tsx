@@ -27,6 +27,18 @@ const Api = {
       }
       request.send(JSON.stringify(parameters))
     })
+  },
+  deleteCard(id: string) {
+    const path = 'http://' + location.hostname + ':' + port + '/api/card/' + id
+    return new Promise((resolve, reject) => {
+      const request = new XMLHttpRequest()
+      request.open('delete', path, true)
+      request.onload = () => {
+        if (request.status === 204) resolve(request.response)
+        else reject(Error('Ошибка' + request.statusText))
+      }
+      request.send(null)
+    })
   }
 }
 

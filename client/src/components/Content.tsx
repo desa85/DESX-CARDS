@@ -18,7 +18,7 @@ export class Content extends React.Component<ContentProp, {}> {
     return(
       <div id = 'content'>
         <ControlSection route = {this.props.route} />
-        <PlayingField cards = { this.props.cards } />
+        <PlayingField deleteCard = {this.props.deleteCard} cards = { this.props.cards } />
       </div>
     )
   }
