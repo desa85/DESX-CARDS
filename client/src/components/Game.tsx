@@ -31,18 +31,25 @@ export class Game extends React.Component<GameProp, MyState, {}> {
         .then(() => deleteCardFromFiled.bind(this)(id))
         .catch(err => console.log(err))
     }
-
-    return(
-      <div id = 'game'>
-        {
-          (this.state.route === 'game') && <Content 
+    const componentByRoute = (routeName: string) => {
+      switch (routeName) {
+        case 'game': {
+          return <Content 
             deleteCard = {deleteCard.bind(this)}
             updateCards = {updateCards.bind(this)} 
             route = {route.bind(this)} 
-            cards = { this.state.cards } /> ||
-          (this.state.route === 'createCard') && <CreateCard route = {route.bind(this)} typeIs = 'earth' /> ||
-          false
-        } 
+            cards = { this.state.cards } 
+          />
+        }
+        case 'createCard': return <CreateCard route = {route.bind(this)} type = 'earth' />
+        default: return null
+      }
+    }
+     
+
+    return(
+      <div id = 'game'>
+        {componentByRoute(this.state.route)} 
         <BlockInfo />
       </div>
     )

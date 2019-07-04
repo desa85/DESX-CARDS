@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-export class ControlSection extends React.Component<{route: void}> {
+export class ControlSection extends React.Component<{route: (routing: string) => void}> {
   render () {
     const onClick = function () {this.props.route('createCard')}
 

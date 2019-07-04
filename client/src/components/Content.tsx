@@ -5,7 +5,7 @@ import { ControlSection } from './ControlSection'
 import { PlayingField } from './PlayingField'
 import Api from '../Api';
 
-export interface ContentProp {cards: Types.Card[]; route: void; updateCards: void}
+export interface ContentProp {cards: Types.Card[]; route: (routing: string) => void; updateCards: (cards: Types.Card[]) => void}
 
 export class Content extends React.Component<ContentProp, {}> {
   componentWillMount() {

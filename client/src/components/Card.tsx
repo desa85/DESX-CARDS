@@ -4,17 +4,18 @@ import * as React from 'react'
 
 export interface CardProp {
   card?: Types.Card;
-  deleteCardFromFiled: void;
 }
 
 export class Card extends React.Component<CardProp, {}> {
   render() {
     const rusTranslation = function (typeMagic: string) {
-      if (typeMagic === 'earth') return 'ЗЕМЛЯ'
-      if (typeMagic === 'water') return 'ВОДА'
-      if (typeMagic === 'fire') return 'ОГОНЬ'
-      if (typeMagic === 'wind') return 'ВОЗДУХ'
-      return null
+      switch (typeMagic) {
+        case 'earth': return 'ЗЕМЛЯ'
+        case 'water': return 'ВОДА'
+        case 'fire': return 'ОГОНЬ'
+        case 'wind': return 'ВОЗДУХ'
+        default: return null
+      }
     } 
     return(
       this.props.card ?

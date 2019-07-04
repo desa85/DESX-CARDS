@@ -4,13 +4,13 @@ import * as React from 'react'
 import { CardRadio } from './CardRadio'
 import Api from '../Api'
 
-interface CreateCardProp { typeIs: string; input: string; route: void }
+interface CreateCardProp { type: string; input: string; route: (type: string) => void }
 
 export class CreateCard extends React.Component<CreateCardProp> {
   constructor (props: CreateCardProp) {
     super(props)
     this.state = {
-      typeIs: this.props.typeIs,
+      type: this.props.type,
       input: ''
     }
   }
@@ -41,14 +41,14 @@ export class CreateCard extends React.Component<CreateCardProp> {
           />
         </div>
         <div className = 'create-card__choose-magic'>
-          <CardRadio choose = {chooseTypeMagic.bind(this)} ru = 'ЗЕМЛЯ' type = 'earth' active = {this.state.typeIs} />
-          <CardRadio choose = {chooseTypeMagic.bind(this)} ru = 'ВОДА' type = 'water' active = {this.state.typeIs} />
-          <CardRadio choose = {chooseTypeMagic.bind(this)} ru = 'ОГОНЬ' type = 'fire' active = {this.state.typeIs} />
-          <CardRadio choose = {chooseTypeMagic.bind(this)} ru = 'ВОЗДУХ' type = 'wind' active = {this.state.typeIs} />
+          <CardRadio onClick = {chooseTypeMagic.bind(this)} value = 'earth' isActive = {this.state.typeIs === 'earth'} />
+          <CardRadio onClick = {chooseTypeMagic.bind(this)} value = 'water' isActive = {this.state.typeIs === 'water'} />
+          <CardRadio onClick = {chooseTypeMagic.bind(this)} value = 'fire' isActive = {this.state.typeIs === 'fire'} />
+          <CardRadio onClick = {chooseTypeMagic.bind(this)} value = 'wind' isActive = {this.state.typeIs === 'wind'} />
         </div>
         <button onClick = {() => createCard.bind(this)(this.state.input, this.state.typeIs)} 
           className = 'create-card__button'>
-          СОЗДАТЬ/РЕДАКТИРОВАТЬ
+          СОЗДАТЬ
         </button>
         <button onClick = {goToGame.bind(this)} className = 'create-card__button'>ОТМЕНИТЬ</button>
       </div>

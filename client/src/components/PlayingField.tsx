@@ -3,7 +3,7 @@
 import * as React from 'react'
 import { Card } from './Card'
 
-export interface Prop {cards: Types.Card[]; deleteCardFromFiled: void}
+export interface Prop {cards: Types.Card[]}
 
 export class PlayingField extends React.Component<Prop, {}> {
   render() {

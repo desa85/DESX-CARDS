@@ -1,10 +1,9 @@
 import * as React from 'react'
 
 export interface CardRadioProp {
-  type: string;
-  active: string;
-  choose: void;
-  ru: string;
+  isActive: boolean;
+  onClick: (a: string) => void;
+  value: string;
 }
 
 export class CardRadio extends React.Component<CardRadioProp, {}> {
@@ -13,13 +12,12 @@ export class CardRadio extends React.Component<CardRadioProp, {}> {
   }
 
   render() {
-    const isActive = this.props.active === this.props.type
-    const onClick = function () {this.props.choose(this.props.type)}
+    const onClick = function () {this.props.onClick(this.props.value)}
 
     return (<div 
       onClick = {onClick.bind(this)}
-      className = {`create-card__type-magic ${(isActive) ? 'create-card__type-magic_active' : ''}`}>
-      {this.props.ru}
+      className = {`create-card__type-magic ${(this.props.isActive) ? 'create-card__type-magic_active' : ''}`}>
+      {this.props.value}
     </div>)
   }
 }
