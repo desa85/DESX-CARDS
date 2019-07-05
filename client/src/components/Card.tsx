@@ -3,7 +3,8 @@
 import * as React from 'react'
 
 export interface CardProp {
-  card?: Types.Card;
+  card?: Types.Card; deleteCard: (id: string) => void;
+  
 }
 
 export class Card extends React.Component<CardProp, {}> {

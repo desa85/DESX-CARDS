@@ -16,9 +16,9 @@ export class CreateCard extends React.Component<CreateCardProp> {
   }
 
   render() {
-    const chooseTypeMagic = function (type: string): void { this.setState( {typeIs: type} ) }
-    const goToGame = function () {this.props.route('game')}
-    const createCard = function (name: string, type: string) {
+    const chooseTypeMagic = (type: string): void => this.setState( {typeIs: type} )
+    const goToGame = () => this.props.route('game')
+    const createCard = (name: string, type: string) => {
       const power = Math.round(Math.random() * 200)
       Api.setCard({
         name: name,
@@ -27,7 +27,7 @@ export class CreateCard extends React.Component<CreateCardProp> {
       })
         .then((result: Types.Card[]) => result)
         .catch(err => console.log(err))
-      goToGame.bind(this)()
+      goToGame()
     }
 
     return (
@@ -41,16 +41,16 @@ export class CreateCard extends React.Component<CreateCardProp> {
           />
         </div>
         <div className = 'create-card__choose-magic'>
-          <CardRadio onClick = {chooseTypeMagic.bind(this)} value = 'earth' isActive = {this.state.typeIs === 'earth'} />
-          <CardRadio onClick = {chooseTypeMagic.bind(this)} value = 'water' isActive = {this.state.typeIs === 'water'} />
-          <CardRadio onClick = {chooseTypeMagic.bind(this)} value = 'fire' isActive = {this.state.typeIs === 'fire'} />
-          <CardRadio onClick = {chooseTypeMagic.bind(this)} value = 'wind' isActive = {this.state.typeIs === 'wind'} />
+          <CardRadio onClick = {chooseTypeMagic} value = 'earth' isActive = {this.state.typeIs === 'earth'} />
+          <CardRadio onClick = {chooseTypeMagic} value = 'water' isActive = {this.state.typeIs === 'water'} />
+          <CardRadio onClick = {chooseTypeMagic} value = 'fire' isActive = {this.state.typeIs === 'fire'} />
+          <CardRadio onClick = {chooseTypeMagic} value = 'wind' isActive = {this.state.typeIs === 'wind'} />
         </div>
-        <button onClick = {() => createCard.bind(this)(this.state.input, this.state.typeIs)} 
+        <button onClick = {() => createCard(this.state.input, this.state.typeIs)} 
           className = 'create-card__button'>
           СОЗДАТЬ
         </button>
-        <button onClick = {goToGame.bind(this)} className = 'create-card__button'>ОТМЕНИТЬ</button>
+        <button onClick = {goToGame} className = 'create-card__button'>ОТМЕНИТЬ</button>
       </div>
     )
   }
