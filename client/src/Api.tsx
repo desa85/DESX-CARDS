@@ -14,6 +14,31 @@ const Api = {
       }
       request.send(null)
     })
+  },
+  setCard(parameters: Types.Card) {
+    const path = 'http://' + location.hostname + ':' + port + '/api/card'
+    return new Promise((resolve, reject) => {
+      const request = new XMLHttpRequest()
+      request.open('POST', path, false)
+      request.setRequestHeader("Content-type", "application/json")
+      request.onreadystatechange = () => {
+        if (request.readyState === 4 && request.status === 200) resolve(JSON.parse(request.response))
+        else reject(Error('Ошибка' + request.statusText + request.responseText))
+      }
+      request.send(JSON.stringify(parameters))
+    })
+  },
+  deleteCard(id: string) {
+    const path = 'http://' + location.hostname + ':' + port + '/api/card/' + id
+    return new Promise((resolve, reject) => {
+      const request = new XMLHttpRequest()
+      request.open('delete', path, true)
+      request.onload = () => {
+        if (request.status === 204) resolve(request.response)
+        else reject(Error('Ошибка' + request.statusText))
+      }
+      request.send(null)
+    })
   }
 }
 
