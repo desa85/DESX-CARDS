@@ -8,9 +8,9 @@ import Api from '../Api';
 
 export interface GameProp { user: string }
 
-interface MyState { cards: Types.Card[]; routeName: string };
+interface GameState { cards: Types.Card[]; routeName: string };
 
-export class Game extends React.Component<GameProp, MyState, {}> {
+export class Game extends React.Component<GameProp, GameState, {}> {
   
   constructor(props: GameProp) {
     super(props)
