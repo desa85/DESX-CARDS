@@ -63,6 +63,6 @@ module.exports = {
     inline: true,
     hot: true,
     open: true,
-    port: 3030
+    port: 3000
   }
 };

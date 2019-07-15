@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "tsc --watch | nodemon dist/main.js",
-    "build": "nodemon ./dist/bundle.js",
+    "build": "tsc && nodemon ./dist/main.js",
     "lint": "./node_modules/.bin/eslint src/ --ext .tsx --ext .ts",
     "lint-fix": "./node_modules/.bin/eslint src/ --ext .tsx --ext .ts --fix",
     "test": "echo \"Error: no test specified\" && exit 1"

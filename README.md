@@ -1,1 +1,4 @@
-# brand new, fresh project
+# Getting started:
+```
+docker-compose up --build
+```
