@@ -3,13 +3,7 @@ import * as Express from 'express'
 import * as uuid from 'uuid/v4'
 import * as bodyParser from 'body-parser'
 
-const client = new Client({
-  user: 'desx_user',
-  host: '127.0.0.1',
-  database: 'desx_cards',
-  password: 'desx_pass',
-  port: 5430,
-})
+const client = new Client()
 
 async function createTable() {
   await client.connect()
@@ -130,4 +124,4 @@ app.delete('/api/card/:id', (req: Express.Request, res: Express.Response) => {
     })
 })
 
-app.listen(3000)
+app.listen(9000, '0.0.0.0')

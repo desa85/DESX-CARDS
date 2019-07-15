@@ -1,18 +1,22 @@
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var path = require('path');
+var webpack = require('webpack');
 
 module.exports = {
   entry: "./src/index.tsx",
   output: {
 		filename: "bundle.js",
 		path: path.resolve(__dirname, './dist')
-	},
+  },
 	
 	plugins: [
 		new HtmlWebpackPlugin({
 			title: 'DESX-CARDS',
 			template: "./src/index.html"
-		})
+    }),
+    new webpack.EnvironmentPlugin({
+      "DESX_CARD_CLIENT_PORT": process.env.DESX_CARD_CLIENT_PORT
+  })
 	],
 
 
@@ -63,6 +67,6 @@ module.exports = {
     inline: true,
     hot: true,
     open: true,
-    port: 3030
+    port: 3000
   }
 };
