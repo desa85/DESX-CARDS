@@ -13,6 +13,8 @@ services:
     build:
       context: ./client
       dockerfile: dockerfile
+    environment:
+    - DESX_CARD_CLIENT_PORT=8080
     expose:
       - 3000
   db:

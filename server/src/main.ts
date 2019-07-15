@@ -5,7 +5,6 @@ import * as bodyParser from 'body-parser'
 
 const client = new Client()
 
-
 async function createTable() {
   await client.connect()
 
