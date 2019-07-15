@@ -1,6 +1,6 @@
 /// <reference path="Types.ts" />
  
-const port = process.env.DESX_CARD_CLIENT_PORT || 9000
+const port = process.env.DESX_CARD_SERVER_PORT || 9000
 const Api = {
   
   getCards(): Promise<Types.Card[]> {
