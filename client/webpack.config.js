@@ -15,7 +15,7 @@ module.exports = {
 			template: "./src/index.html"
     }),
     new webpack.EnvironmentPlugin({
-      "DESX_CARD_CLIENT_PORT": process.env.DESX_CARD_CLIENT_PORT
+      "DESX_CARD_SERVER_PORT": process.env.DESX_CARD_CLIENT_PORT
   })
 	],
 
