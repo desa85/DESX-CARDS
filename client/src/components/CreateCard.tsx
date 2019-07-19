@@ -41,10 +41,10 @@ export class CreateCard extends React.Component<CreateCardProp> {
           />
         </div>
         <div className = 'create-card__choose-magic'>
-          <CardRadio onClick = {chooseTypeMagic} value = 'earth' isActive = {this.state.type === 'earth'} />
-          <CardRadio onClick = {chooseTypeMagic} value = 'water' isActive = {this.state.type === 'water'} />
-          <CardRadio onClick = {chooseTypeMagic} value = 'fire' isActive = {this.state.type === 'fire'} />
-          <CardRadio onClick = {chooseTypeMagic} value = 'wind' isActive = {this.state.type === 'wind'} />
+          <CardRadio onClick = {chooseTypeMagic} name = 'ЗЕМЛЯ' value = 'earth' isActive = {this.state.type === 'earth'} />
+          <CardRadio onClick = {chooseTypeMagic} name = 'ВОДА' value = 'water' isActive = {this.state.type === 'water'} />
+          <CardRadio onClick = {chooseTypeMagic} name = 'ОГОНЬ' value = 'fire' isActive = {this.state.type === 'fire'} />
+          <CardRadio onClick = {chooseTypeMagic} name = 'ВОЗДУХ' value = 'wind' isActive = {this.state.type === 'wind'} />
         </div>
         <button onClick = {() => createCard(this.state.input, this.state.type)} 
           className = 'create-card__button'>
