@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto+Condensed&display=swap');
 @font-face {
   font-family: 'Avenir-Next';
-  src: url(/fonts/Avenir_Next.ttf);
+  src: url(/src/fonts/Avenir_Next.ttf);
 }
 
 $margin-top: 24px;
@@ -156,7 +156,7 @@ body {
     margin-right: 14px;
     margin-top: 16px;
     p {
-      font-family: 'Avenir-Next';;
+      font-family: 'Avenir-Next';
       font-size: 25px;
       text-align: right;
     }
@@ -282,6 +282,9 @@ body {
     background-color: #d29c4e;
     margin: auto;
     margin-top: 13px;
+    font-size: 25px;
+    font-weight: 500;
+    color: #434343;
 
     &:focus {
       outline: none;
