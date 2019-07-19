@@ -288,3 +288,44 @@ body {
     }
   }
 }
+
+.error-window {
+  position: absolute;
+  width: 553px;
+  height: 300px;
+  border: solid 1px #979797;
+  background-color: #af5151;
+
+  &__head{
+    padding-top: 16px;
+    height: 42px;
+    width: 502px;
+    margin: auto;
+    font-size: 25px;
+    color: #434343;
+  } 
+
+  &__message {
+    width: 485px;
+    height: 146px;
+    padding-left: 24px;
+    padding-top: 17px;
+    background-color: #9f4a4a;
+    margin: auto;
+  }
+
+  &__button-close {
+    width: 502px;
+    margin: auto;
+    text-align: right;
+  }
+
+  &__button {
+    display: inline-block;
+    margin-top: 28px;
+    font-size: 25px;
+    color: #434343;
+    background-color: #00000000;
+    border: none;
+  }
+}

@@ -10,12 +10,14 @@ const Api = {
       request.open('GET', path, true)
       request.onload = () => {
         if (request.status === 200) resolve(JSON.parse(request.response))
-        else reject(Error('Ошибка' + request.statusText))
+        else {
+          reject(Error('Ошибка' + request.statusText))
+        }
       }
       request.send(null)
     })
   },
-  setCard(parameters: Types.Card) {
+  setCard(parameters: Types.Card, callErrorWindow: (message: string) => void) {
     const path = 'http://' + location.hostname + ':' + port + '/api/card'
     return new Promise((resolve, reject) => {
       const request = new XMLHttpRequest()
@@ -23,7 +25,10 @@ const Api = {
       request.setRequestHeader("Content-type", "application/json")
       request.onreadystatechange = () => {
         if (request.readyState === 4 && request.status === 200) resolve(JSON.parse(request.response))
-        else reject(Error('Ошибка' + request.statusText + request.responseText))
+        else {
+          reject(Error('Ошибка' + request.statusText + request.responseText))
+          callErrorWindow(JSON.parse(request.responseText).message)
+        }
       }
       request.send(JSON.stringify(parameters))
     })

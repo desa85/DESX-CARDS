@@ -24,7 +24,7 @@ export class CreateCard extends React.Component<CreateCardProp> {
         name: name,
         typeMagic: type, 
         power: power
-      })
+      }, this.props.showErrorWindow)
         .then((result: Types.Card[]) => result)
         .catch(err => console.log(err))
       goToGame()
