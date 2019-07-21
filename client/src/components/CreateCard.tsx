@@ -16,7 +16,7 @@ export class CreateCard extends React.Component<CreateCardProp> {
   }
 
   render() {
-    const chooseTypeMagic = (type: string): void => this.setState( {type: type} )
+    const chooseTypeMagic = (type: string): object => ({choose: () => this.setState({type: type}), type: type})
     const goToGame = () => this.props.route('game')
     const createCard = (name: string, type: string) => {
       const power = Math.round(Math.random() * 200)
@@ -24,9 +24,9 @@ export class CreateCard extends React.Component<CreateCardProp> {
         name: name,
         typeMagic: type, 
         power: power
-      }, this.props.showErrorWindow)
+      })
         .then((result: Types.Card[]) => result)
-        .catch(err => console.log(err))
+        .catch(err => {console.log(err); this.props.showErrorWindow(err)})
       goToGame()
     }
 
@@ -41,10 +41,10 @@ export class CreateCard extends React.Component<CreateCardProp> {
           />
         </div>
         <div className = 'create-card__choose-magic'>
-          <CardRadio onClick = {chooseTypeMagic} name = 'ЗЕМЛЯ' value = 'earth' isActive = {this.state.type === 'earth'} />
-          <CardRadio onClick = {chooseTypeMagic} name = 'ВОДА' value = 'water' isActive = {this.state.type === 'water'} />
-          <CardRadio onClick = {chooseTypeMagic} name = 'ОГОНЬ' value = 'fire' isActive = {this.state.type === 'fire'} />
-          <CardRadio onClick = {chooseTypeMagic} name = 'ВОЗДУХ' value = 'wind' isActive = {this.state.type === 'wind'} />
+          <CardRadio typeMagic = {chooseTypeMagic('earth')} value = 'ЗЕМЛЯ' isActive = {this.state.type} />
+          <CardRadio typeMagic = {chooseTypeMagic('water')} value = 'ВОДА' isActive = {this.state.type} />
+          <CardRadio typeMagic = {chooseTypeMagic('fire')} value = 'ОГОНЬ' isActive = {this.state.type} />
+          <CardRadio typeMagic = {chooseTypeMagic('wind')} value = 'ВОЗДУХ' isActive = {this.state.type} />
         </div>
         <button onClick = {() => createCard(this.state.input, this.state.type)} 
           className = 'create-card__button'>

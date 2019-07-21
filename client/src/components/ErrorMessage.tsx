@@ -8,7 +8,6 @@ export class ErrorMessage extends React.Component<ErrorMessageState, {}> {
   }
   render() {
     return(
-      this.props.isVisible &&
       <div className = 'error-window'>
         <div className = 'error-window__head' >Ошибка</div>
         <div className = 'error-window__message' >{this.props.message}</div>
