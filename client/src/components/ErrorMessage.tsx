@@ -1,8 +1,8 @@
 import * as React from 'react'
 
-interface ErrorMessageState { cisError: boolean; message: string; closeWindow: void };
+interface ErrorMessageProps { cisError: boolean; message: string; closeWindow: void };
 
-export class ErrorMessage extends React.Component<ErrorMessageState, {}> {
+export class ErrorMessage extends React.Component<ErrorMessageProps, {}> {
   constructor(prop) {
     super(prop)
   }
