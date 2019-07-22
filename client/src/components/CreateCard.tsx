@@ -16,7 +16,12 @@ export class CreateCard extends React.Component<CreateCardProp> {
   }
 
   render() {
-    const chooseTypeMagic = (type: string): void => this.setState( {type: type} )
+    const cardRadio = (typeMagic: string, name: string) => {
+      return (<CardRadio 
+        onClick = {() => this.setState({type: typeMagic})} 
+        value = {name} 
+        isActive = {this.state.type === typeMagic} />)
+    }
     const goToGame = () => this.props.route('game')
     const createCard = (name: string, type: string) => {
       const power = Math.round(Math.random() * 200)
@@ -26,7 +31,7 @@ export class CreateCard extends React.Component<CreateCardProp> {
         power: power
       })
         .then((result: Types.Card[]) => result)
-        .catch(err => console.log(err))
+        .catch(err => {console.log(err); this.props.showErrorWindow(err)})
       goToGame()
     }
 
@@ -41,10 +46,10 @@ export class CreateCard extends React.Component<CreateCardProp> {
           />
         </div>
         <div className = 'create-card__choose-magic'>
-          <CardRadio onClick = {chooseTypeMagic} value = 'earth' isActive = {this.state.type === 'earth'} />
-          <CardRadio onClick = {chooseTypeMagic} value = 'water' isActive = {this.state.type === 'water'} />
-          <CardRadio onClick = {chooseTypeMagic} value = 'fire' isActive = {this.state.type === 'fire'} />
-          <CardRadio onClick = {chooseTypeMagic} value = 'wind' isActive = {this.state.type === 'wind'} />
+          {cardRadio('earth', 'ЗЕМЛЯ')}
+          {cardRadio('water', 'ВОДА')}
+          {cardRadio('fire', 'ОГОНЬ')}
+          {cardRadio('wind', 'ВОЗДУХ')}
         </div>
         <button onClick = {() => createCard(this.state.input, this.state.type)} 
           className = 'create-card__button'>

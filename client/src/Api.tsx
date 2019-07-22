@@ -1,5 +1,14 @@
-/// <reference path="Types.ts" />
- 
+/// <reference path="./Types.ts" />
+
+export class Error {
+  code: string
+  message: string
+  constructor(code: string, message: string) {
+    this.code = code
+    this.message = message
+  }
+}
+
 const port = process.env.DESX_CARD_SERVER_PORT || 9000
 const Api = {
   
@@ -10,7 +19,9 @@ const Api = {
       request.open('GET', path, true)
       request.onload = () => {
         if (request.status === 200) resolve(JSON.parse(request.response))
-        else reject(Error('Ошибка' + request.statusText))
+        else {
+          reject(new Error(request.statusText.code, request.statusText.message))
+        }
       }
       request.send(null)
     })
@@ -23,7 +34,10 @@ const Api = {
       request.setRequestHeader("Content-type", "application/json")
       request.onreadystatechange = () => {
         if (request.readyState === 4 && request.status === 200) resolve(JSON.parse(request.response))
-        else reject(Error('Ошибка' + request.statusText + request.responseText))
+        else {
+          const {code, message} = JSON.parse(request.responseText)
+          reject(new Error(code, message)) 
+        }       
       }
       request.send(JSON.stringify(parameters))
     })
@@ -35,7 +49,10 @@ const Api = {
       request.open('delete', path, true)
       request.onload = () => {
         if (request.status === 204) resolve(request.response)
-        else reject(Error('Ошибка' + request.statusText))
+        else {
+          const {code, message} = JSON.parse(request.responseText)
+          reject(new Error(code, message)) 
+        }
       }
       request.send(null)
     })

@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto+Condensed&display=swap');
 @font-face {
   font-family: 'Avenir-Next';
-  src: url(/fonts/Avenir_Next.ttf);
+  src: url(/src/fonts/Avenir_Next.ttf);
 }
 
 $margin-top: 24px;
@@ -156,7 +156,7 @@ body {
     margin-right: 14px;
     margin-top: 16px;
     p {
-      font-family: 'Avenir-Next';;
+      font-family: 'Avenir-Next';
       font-size: 25px;
       text-align: right;
     }
@@ -282,9 +282,54 @@ body {
     background-color: #d29c4e;
     margin: auto;
     margin-top: 13px;
+    font-size: 25px;
+    font-weight: 500;
+    color: #434343;
 
     &:focus {
       outline: none;
     }
+  }
+}
+
+.error-window {
+  position: absolute;
+  width: 553px;
+  height: 300px;
+  border: solid 1px #979797;
+  background-color: #af5151;
+
+  &__head{
+    padding-top: 16px;
+    height: 42px;
+    width: 502px;
+    margin: auto;
+    font-size: 25px;
+    color: #434343;
+  } 
+
+  &__message {
+    width: 485px;
+    height: 146px;
+    padding-left: 24px;
+    padding-top: 17px;
+    background-color: #9f4a4a;
+    font-family: 'Avenir-Next';
+    margin: auto;
+  }
+
+  &__button-close {
+    width: 502px;
+    margin: auto;
+    text-align: right;
+  }
+
+  &__button {
+    display: inline-block;
+    margin-top: 28px;
+    font-size: 25px;
+    color: #434343;
+    background-color: #00000000;
+    border: none;
   }
 }

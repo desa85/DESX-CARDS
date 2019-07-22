@@ -4,11 +4,13 @@ import * as React from 'react'
 import { Content } from './Content'
 import { BlockInfo } from './BlockInfo'
 import { CreateCard } from './CreateCard'
+import { ErrorMessage } from './ErrorMessage'
 import Api from '../Api';
+import { Error } from '../Api';
 
 export interface GameProp { user: string }
 
-interface GameState { cards: Types.Card[]; routeName: string };
+interface GameState { cards: Types.Card[]; routeName: string; error: Error | null};
 
 export class Game extends React.Component<GameProp, GameState, {}> {
   
@@ -16,7 +18,8 @@ export class Game extends React.Component<GameProp, GameState, {}> {
     super(props)
     this.state = {
       cards: [],
-      routeName: 'game'
+      routeName: 'game',
+      error: null
     }
   }
   
@@ -26,6 +29,8 @@ export class Game extends React.Component<GameProp, GameState, {}> {
     const deleteCardFromFiled = (id: string): void => {
       this.setState({cards: this.state.cards.filter((card: object) => card.id !== id)})
     }
+    const showErrorWindow = (err: Error) => this.setState( {error: err} )
+    const closeErrorWindow = () => this.setState( {error: null} )
     const deleteCard = (id: string): void => {
       Api.deleteCard(id)
         .then(() => deleteCardFromFiled(id))
@@ -41,7 +46,7 @@ export class Game extends React.Component<GameProp, GameState, {}> {
             cards = { this.state.cards } 
           />
         }
-        case 'createCard': return <CreateCard route = {route} type = 'earth' />
+        case 'createCard': return <CreateCard route = {route} type = 'earth' showErrorWindow = {showErrorWindow} />
         default: return null
       }
     }
@@ -49,6 +54,7 @@ export class Game extends React.Component<GameProp, GameState, {}> {
 
     return(
       <div id = 'game'>
+        {this.state.error && <ErrorMessage message = {this.state.error.message} closeWindow = {closeErrorWindow} />}
         {componentByRoute(this.state.routeName)} 
         <BlockInfo />
       </div>
