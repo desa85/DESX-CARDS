@@ -10,7 +10,7 @@ import { Error } from '../Api';
 
 export interface GameProp { user: string }
 
-interface GameState { cards: Types.Card[]; routeName: string; error: string | null};
+interface GameState { cards: Types.Card[]; routeName: string; error: Error | null};
 
 export class Game extends React.Component<GameProp, GameState, {}> {
   
@@ -29,7 +29,7 @@ export class Game extends React.Component<GameProp, GameState, {}> {
     const deleteCardFromFiled = (id: string): void => {
       this.setState({cards: this.state.cards.filter((card: object) => card.id !== id)})
     }
-    const showErrorWindow = (err: Error) => this.setState( {error: err.message} )
+    const showErrorWindow = (err: Error) => this.setState( {error: err} )
     const closeErrorWindow = () => this.setState( {error: null} )
     const deleteCard = (id: string): void => {
       Api.deleteCard(id)
@@ -54,7 +54,7 @@ export class Game extends React.Component<GameProp, GameState, {}> {
 
     return(
       <div id = 'game'>
-        {this.state.error && <ErrorMessage message = {this.state.error} closeWindow = {closeErrorWindow} />}
+        {this.state.error && <ErrorMessage message = {this.state.error.message} closeWindow = {closeErrorWindow} />}
         {componentByRoute(this.state.routeName)} 
         <BlockInfo />
       </div>
