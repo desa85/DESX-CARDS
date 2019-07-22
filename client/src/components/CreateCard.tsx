@@ -16,7 +16,7 @@ export class CreateCard extends React.Component<CreateCardProp> {
   }
 
   render() {
-    const cardRadio = (typeMagic: String, name: String) => {
+    const cardRadio = (typeMagic: string, name: string) => {
       return (<CardRadio 
         onClick = {() => this.setState({type: typeMagic})} 
         value = {name} 

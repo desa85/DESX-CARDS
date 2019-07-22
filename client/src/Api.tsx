@@ -1,7 +1,5 @@
 /// <reference path="./Types.ts" />
 
-import { STATUS_CODES } from "http";
-
 export class Error {
   code: string
   message: string
