@@ -10,7 +10,7 @@ import { Error } from '../Api';
 
 export interface GameProp { user: string }
 
-interface GameState { cards: Types.Card[]; routeName: string; error: Error | null};
+interface GameState { cards: Types.Card[]; routeName: string; error: string | null};
 
 export class Game extends React.Component<GameProp, GameState, {}> {
   
