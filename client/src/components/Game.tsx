@@ -1,20 +1,12 @@
 /// <reference path="../Types.ts" />
 
-export class Error {
-  code: string
-  message: string
-  constructor(code: string, message: string) {
-    this.code = code
-    this.message = message
-  }
-}
-
 import * as React from 'react'
 import { Content } from './Content'
 import { BlockInfo } from './BlockInfo'
 import { CreateCard } from './CreateCard'
 import { ErrorMessage } from './ErrorMessage'
 import Api from '../Api';
+import { Error } from '../Api';
 
 export interface GameProp { user: string }
 
@@ -37,7 +29,7 @@ export class Game extends React.Component<GameProp, GameState, {}> {
     const deleteCardFromFiled = (id: string): void => {
       this.setState({cards: this.state.cards.filter((card: object) => card.id !== id)})
     }
-    const showErrorWindow = (err: string) => this.setState( {error: new Error(err.code, err.message)} )
+    const showErrorWindow = (err: Error) => this.setState( {error: err.message} )
     const closeErrorWindow = () => this.setState( {error: null} )
     const deleteCard = (id: string): void => {
       Api.deleteCard(id)
@@ -62,7 +54,7 @@ export class Game extends React.Component<GameProp, GameState, {}> {
 
     return(
       <div id = 'game'>
-        {this.state.error && <ErrorMessage message = {this.state.error.message} closeWindow = {closeErrorWindow} />}
+        {this.state.error && <ErrorMessage message = {this.state.error} closeWindow = {closeErrorWindow} />}
         {componentByRoute(this.state.routeName)} 
         <BlockInfo />
       </div>

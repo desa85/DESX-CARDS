@@ -16,7 +16,12 @@ export class CreateCard extends React.Component<CreateCardProp> {
   }
 
   render() {
-    const chooseTypeMagic = (type: string): object => ({choose: () => this.setState({type: type}), type: type})
+    const cardRadio = (typeMagic: String, name: String) => {
+      return (<CardRadio 
+        onClick = {() => this.setState({type: typeMagic})} 
+        value = {name} 
+        isActive = {this.state.type === typeMagic} />)
+    }
     const goToGame = () => this.props.route('game')
     const createCard = (name: string, type: string) => {
       const power = Math.round(Math.random() * 200)
@@ -41,10 +46,10 @@ export class CreateCard extends React.Component<CreateCardProp> {
           />
         </div>
         <div className = 'create-card__choose-magic'>
-          <CardRadio typeMagic = {chooseTypeMagic('earth')} value = 'ЗЕМЛЯ' isActive = {this.state.type} />
-          <CardRadio typeMagic = {chooseTypeMagic('water')} value = 'ВОДА' isActive = {this.state.type} />
-          <CardRadio typeMagic = {chooseTypeMagic('fire')} value = 'ОГОНЬ' isActive = {this.state.type} />
-          <CardRadio typeMagic = {chooseTypeMagic('wind')} value = 'ВОЗДУХ' isActive = {this.state.type} />
+          {cardRadio('earth', 'ЗЕМЛЯ')}
+          {cardRadio('water', 'ВОДА')}
+          {cardRadio('fire', 'ОГОНЬ')}
+          {cardRadio('wind', 'ВОЗДУХ')}
         </div>
         <button onClick = {() => createCard(this.state.input, this.state.type)} 
           className = 'create-card__button'>

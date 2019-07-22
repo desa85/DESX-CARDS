@@ -1,5 +1,7 @@
 /// <reference path="./Types.ts" />
 
+import { STATUS_CODES } from "http";
+
 export class Error {
   code: string
   message: string
@@ -34,7 +36,10 @@ const Api = {
       request.setRequestHeader("Content-type", "application/json")
       request.onreadystatechange = () => {
         if (request.readyState === 4 && request.status === 200) resolve(JSON.parse(request.response))
-        else reject(new Error(JSON.parse(request.responseText).code, JSON.parse(request.responseText).message))        
+        else {
+          const {code, message} = JSON.parse(request.responseText)
+          reject(new Error(code, message)) 
+        }       
       }
       request.send(JSON.stringify(parameters))
     })
@@ -46,7 +51,10 @@ const Api = {
       request.open('delete', path, true)
       request.onload = () => {
         if (request.status === 204) resolve(request.response)
-        else reject(new Error(request.statusText.code, request.statusText.message))
+        else {
+          const {code, message} = JSON.parse(request.responseText)
+          reject(new Error(code, message)) 
+        }
       }
       request.send(null)
     })
