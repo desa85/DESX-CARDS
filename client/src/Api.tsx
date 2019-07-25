@@ -1,5 +1,7 @@
 /// <reference path="./Types.ts" />
 
+import * as Types from "Types";
+
 export class Error {
   code: string
   message: string
@@ -20,7 +22,8 @@ const Api = {
       request.onload = () => {
         if (request.status === 200) resolve(JSON.parse(request.response))
         else {
-          reject(new Error(request.statusText.code, request.statusText.message))
+          const {code, message}: {code: string; message: string} = request.statusText
+          reject(new Error(code, message))
         }
       }
       request.send(null)
